@@ -3,25 +3,57 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Simple Clock</title>
+<title>Beautiful Clock</title>
 <style>
   body {
-    font-family: Arial, sans-serif;
+    font-family: 'Courier New', Courier, monospace;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: #f0f0f0;
+    background-color: #333;
   }
   #clock {
-    font-size: 48px;
-    font-weight: bold;
+    font-size: 4em;
+    color: #fff;
+    text-shadow: 0 0 10px #000;
+    background-color: #555;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  #clock .hour, #clock .minute, #clock .second {
+    display: inline-block;
+  }
+  @keyframes tick {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+  #clock .tick {
+    animation: tick 1s infinite;
+  }
+  #clock .hour {
+    animation-delay: 0s;
+  }
+  #clock .minute {
+    animation-delay: 0.5s;
+  }
+  #clock .second {
+    animation-delay: 1s;
   }
 </style>
 </head>
 <body>
-<div id="clock"></div>
+<div id="clock">
+  <span id="hour" class="hour tick"></span>:
+  <span id="minute" class="minute tick"></span>:
+  <span id="second" class="second tick"></span>
+</div>
 
 <script>
   function updateClock() {
@@ -30,14 +62,16 @@
     const minutes = now.getMinutes();
     const seconds = now.getSeconds();
 
-    let timeString = `${hours < 10 ? '0' : ''}${hours}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-
-    document.getElementById('clock').textContent = timeString;
+    // 更新时钟显示
+    document.getElementById('hour').textContent = (hours < 10 ? '0' : '') + hours;
+    document.getElementById('minute').textContent = (minutes < 10 ? '0' : '') + minutes;
+    document.getElementById('second').textContent = (seconds < 10 ? '0' : '') + seconds;
   }
 
-  // Update the clock every second
+  // 更新时钟的显示
+  updateClock();
+  // 更新时钟，每秒一次
   setInterval(updateClock, 1000);
-  updateClock(); // Initial update
 </script>
 </body>
 </html>
