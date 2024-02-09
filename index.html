@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simple Clock</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+  }
+  #clock {
+    font-size: 48px;
+    font-weight: bold;
+  }
+</style>
+</head>
+<body>
+<div id="clock"></div>
+
+<script>
+  function updateClock() {
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const seconds = now.getSeconds();
+
+    let timeString = `${hours < 10 ? '0' : ''}${hours}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+    document.getElementById('clock').textContent = timeString;
+  }
+
+  // Update the clock every second
+  setInterval(updateClock, 1000);
+  updateClock(); // Initial update
+</script>
+</body>
+</html>
